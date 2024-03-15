@@ -7,13 +7,41 @@ def main():
     book = load_address_book(filename_book)
     note = load_note_book(filename_note)
     print('Welcome to the assistant bot!')
+    print('Available commands')
+    help = """
+Available commands:
+  - help: print all comands
+  - close, exit
+  - hello
+  - add-contact
+  - change-contact
+  - phone
+  - all-contact
+  - change-contact
+  - phone
+  - all-contact
+  - add-birthday
+  - show-birthday
+  - birthday
+  - search
+Available note commands:
+  - add-note: Add a new note (title and text).
+  - change-note: Change the text of a note.
+  - delete-note: Delete a note by title.
+  - add-tag: Add a tag to a note.
+  - delete-tag: Remove a tag from a note.
+  - find-note: Search and display a note by tag or title.
+  - all-note: Display all notes.
+  - help-note: Display this help message.
+"""
+    print(help)
+
     while True:
         user_input = input('Enter a command: ')
         try:
             command, *args = parse_input(user_input)
         except ValueError:
             command = 'Invalid command'
-
 
         if command in ['close', 'exit']:
             print('Saving address book...')
@@ -22,6 +50,8 @@ def main():
             save_note_book(note, filename_note)
             print('Good bye!')
             break
+        elif command == 'help':
+            print(help)
         elif command == 'hello':
             print('How can I help you?')
         elif command == 'add-contact':
@@ -54,6 +84,8 @@ def main():
             print(note.get_all_notes())
         elif command == 'help-note':
             print(note.help_note())
+        elif command == 'search':
+            print(search(args, book))
         else:
             print('Invalid command.')
 

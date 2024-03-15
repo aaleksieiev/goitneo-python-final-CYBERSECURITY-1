@@ -6,6 +6,8 @@
 None
 
 Перелік функцій застосунка
+- exit, close
+- 
 -----------
 Available note commands:
   - add-note: Add a new note (title and text).

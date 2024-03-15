@@ -165,3 +165,24 @@ def load_note_book(filename):
 def save_note_book(note, filename):
     with open(filename, 'wb') as f:
         pickle.dump(note, f)
+
+
+def search(args, book):
+    needle = args[0]
+    contacts_list = []
+    max_name_length = max(len(name) for name in book.keys())
+    
+    for name, record in book.items():
+        
+        if not str(record).find(needle):
+            continue
+        
+        phones = ", ".join(str(phone) for phone in record.phones)
+        if record.birthday is not None:
+            birthday = record.birthday.strftime('%d.%m.%Y')
+        else:
+            birthday = "N/A"
+        contact_info = f"Contact name: {name.ljust(max_name_length)}, phones: {phones}, birthday: {birthday}"
+        contacts_list.append(contact_info)
+
+    return '\n'.join(contacts_list)
